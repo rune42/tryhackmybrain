@@ -1,4 +1,4 @@
-/*
+<!---
  * Copyright (c) 2017 Robert Musser
  * 
  * This file is licensed under the MIT License.
@@ -8,7 +8,7 @@
  * NOTE: This file is a third-party dependency. It is NOT covered 
  * by the CC0 1.0 Universal designation applying to the rest of 
  * this repository.
- */
+-->
  ## Nmap Cheat Sheet
 
 ### Basic Scanning Techniques
