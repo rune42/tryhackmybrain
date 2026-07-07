@@ -1,0 +1,13 @@
+THIRD-PARTY CODE NOTICE
+
+Per Section 4(c) of the CC0 1.0 Universal designation governing this 
+repository, the Affirmer disclaims responsibility for clearing third-party 
+rights. 
+
+Please be advised that this repository contains files that use third-party code and documentation governed 
+by its own respective license:
+
+* File '/cheat-sheets/nmap.md' directory is derived from 
+ 'https://github.com/rmusser01/Infosec_Reference/' and licensed under the MIT License. 
+  See 'https://github.com/rmusser01/Infosec_Reference/blob/master/LICENSE' for the full copyright notice 
+  and permission text required by the author.
