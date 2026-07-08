@@ -1,6 +1,7 @@
 # Checklist: Linux Privilege Escalation
 
 **Objective:** Systematically enumerate a Linux target after gaining an initial low-privilege shell to identify paths to `root`.
+
 **Last Updated:** 2026-08-07
 
 ---
