@@ -36,3 +36,7 @@ find . -name "*.pl" -exec ls -ld {} \;                            # run ls comma
 ```
 find . -type f -name "*.mp3" -exec cp {} /home/thm/Music \;       # cp *.mp3 files to /home/thm/Music
 ```
+---
+**Unless otherwise indicated at the root NOTICE file, all the information submitted to this repo is protected under Creative Commons Universal 1.0 (CC0-v1.0) license and is free to consult, copy, distribute and transform with no permission nor atribution required.**
+
+_Way to go, brain! Good luck and happy hacking!_
