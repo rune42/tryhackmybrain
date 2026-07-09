@@ -37,13 +37,11 @@ Run lightweight automation scripts to gather a baseline profile of the operating
 - [ ] **Determine OS Architecture & Kernel Version:** Run `uname -a` and check `/etc/issue`.
 - [ ] **Identify Running Services:** Look for internal-only ports or services running as root using `netstat` or `ss`.
 <!---
-  * *Reference:* See [`../cheatsheets/linux/networking-commands.md`](../cheatsheets/linux/networking-commands.md).
+  * *Reference:* See [`../cheat-sheets/linux/networking-commands.md`](../cheat-sheets/linux/networking-commands.md).
 -->
 ### 3. File System & Permissions
 - [ ] **Search for SUID/SGID Binaries:** Hunt for files with anomalous execution permissions.
-<!---
-  * *Reference:* Custom `find` commands located in [`../cheatsheets/linux/file-searching.md`](../cheatsheets/linux/file-searching.md).
--->  
+  * *Reference:* Custom `find` commands located in [`../cheat-sheets/linux/file-searching.md`](../cheat-sheets/linux/file-searching.md).
 - [ ] **Inspect Writable Directories/Files:** Check if critical files like `/etc/passwd` or cron job directories are world-writable.
 
 ---
