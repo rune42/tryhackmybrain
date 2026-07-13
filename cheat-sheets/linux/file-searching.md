@@ -1,4 +1,4 @@
-## Usage of `find` and similar tools in Linux
+## Usage of `find` in Linux
 ### Basic file searching
 ```
 find / -name file.txt -type f -print             # full command
