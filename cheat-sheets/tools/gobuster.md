@@ -6,7 +6,7 @@ gobuster [mode] -u [URL] -w [wordlist] [flags]
 ```
 
 ### Folder and file scanning (`dir`)
-- Scan for 
+- Scan for hidden directories and web files
 ```bash
 gobuster dir -u https://example.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 20 -x php,html
 ```
