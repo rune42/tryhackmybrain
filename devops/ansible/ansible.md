@@ -107,6 +107,19 @@ Build resilient workflows by defining fallback tasks if a primary action fails:
 ## Easter Egg: The Ansible Cow 🐄
 Did you know Ansible natively loves cows? If you have the `cowsay` utility installed on your control node, Ansible automatically wraps all terminal task headers inside a friendly ASCII cow speech bubble!
 
+### Customizing or Disabling the Cow
+If you want to control this behavior via your `ansible.cfg` file, use the following options under the `[defaults]` section:
+
+* **To disable it entirely** (if the ASCII art breaks your logs or CI/CD pipelines):
+  ```ini
+  [defaults]
+  nocows = 1
+  ```
+* **To change the animal** (if you have different `.cow` files installed on your system):
+  ```ini
+  [defaults]
+  cow_selection = tux
+  ```
 ---
 **Unless otherwise indicated at the root NOTICE file, all the information submitted to this repo is protected under Creative Commons Universal 1.0 (CC0-v1.0) license and is free to consult, copy, distribute and transform with no permission nor atribution required.**
 
