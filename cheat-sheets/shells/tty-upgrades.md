@@ -59,6 +59,7 @@ Ctrl + Z
 stty raw -echo; fg
 ```
 ---
-**Unless otherwise indicated at the root NOTICE file, all the information submitted to this repo is protected under Creative Commons Universal 1.0 (CC0-v1.0) license and is free to consult, copy, distribute and transform with no permission nor atribution required.**
+**This repository is for educational and authorized security auditing purposes only. All testing should be conducted in isolated, self-hosted, or explicitly permitted environments. The author assumes no liability for misuse.**
+**Unless otherwise indicated at the root NOTICE file, all the information submitted to this repository is protected under Creative Commons Universal 1.0 (CC0-v1.0) license and is free to consult, copy, distribute and transform with no permission nor atribution required.**
 
 _Way to go, brain! Good luck and happy hacking!_
