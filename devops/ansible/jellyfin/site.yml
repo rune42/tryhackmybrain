@@ -1,0 +1,54 @@
+# This is a playbook for a Jellyfin deployment in a baremetal legacy computer that runs Ubuntu or Debian without GUI.
+# TODO: implement alternatives that account for other distros and platforms (such as libvirt, LXC or VMWare ESXi) 
+
+- name: Ensure the North slot (Data) in my dock mounts on fstab with optimizer flags
+  ansible.posix.mount:
+    path: /mnt/media-north
+    src: UUID=my-north-drive
+    fstype: ext4
+    opts: defaults,nofail,noatime,nodiratime,errors=remount-ro
+    state: mounted
+
+# This step involves making sure the top-loader USB dock with the data drives with the content streamed by Jellyfin doesn't power down, in order to prevent streaming errors.
+    
+- name: Create keepalive script that reads the drive and feeds to stdout
+  ansible.builtin.copy:
+    dest: /usr/local/bin/disk_keepalive.sh
+    mode: '0755'
+    content: |
+      #!/bin/bash
+      # Read a block at random from each drive to prevent spindown
+      dd if=/dev/sdb of=/dev/null count=1 bs=512 >/dev/null 2>&1
+      dd if=/dev/sdc of=/dev/null count=1 bs=512 >/dev/null 2>&1
+      logger "Your toaster has been successfully re-heated!"
+
+- name: Schedule cronjob for every 9 minutes
+  ansible.builtin.cron:
+    name: "Wavlink Keep Alive"
+    minute: "*/9"
+    job: "/usr/local/bin/disk_keepalive.sh"
+
+# In here we install Jellyfin proper. Cowsay because the cow is contractually obliged to move from here to Jellyfin.
+
+- name: Install previous dependencies
+  ansible.builtin.apt:
+    name: [curl, gnupg, apt-transport-https, cowsay]
+    state: present
+    update_cache: yes
+
+- name: Add Jellyfin GPG key
+  ansible.builtin.apt_key:
+    url: https://repo.jellyfin.org/jellyfin_team.gpg.key
+    state: present
+
+- name: Add Jellyfin repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://jellyfin.org/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Install Jellyfin
+  ansible.builtin.apt:
+    name: jellyfin
+    state: present
+
+# TODO2: tinker with Jellyfin and learn the ins and outs before elaborating on this playbook
