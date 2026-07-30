@@ -1,4 +1,5 @@
-# This is a playbook for a Jellyfin deployment in a baremetal legacy computer that runs Ubuntu or Debian without GUI.
+# This is a playbook for a Jellyfin deployment in a baremetal legacy computer that runs Ubuntu or Debian without GUI. 
+# Considering to pivot from this to a containerized PoC, but for a full-on GPL3 repository.
 # TODO: implement alternatives that account for other distros and platforms (such as libvirt, LXC or VMWare ESXi) 
 
 - name: Ensure the North slot (Data) in my dock mounts on fstab with optimizer flags
