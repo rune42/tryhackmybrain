@@ -2,6 +2,14 @@
 
 This repository contains a set of notes, code snippets, links, cheat sheets and an estimated roadmap of my TryHackMe progression. Over the next months, I shall be adding rough drafts, notes and other data of interest as I go through THM rooms big and small, as well as some other platforms I may take an interest in down the road.
 
+## Table of contents
+
+- **[Cheat Sheets](/cheat-sheets)**
+- **[Automation and Orchestration](/devops)**
+- **[Methodologies and checklists](/checklists)**
+- **[Scripts (Bash, Python)](/scripts)**
+- **[Miscellaneous](/notes)**
+
 ---
 **This repository is for educational and authorized security auditing purposes only. All testing should be conducted in isolated, self-hosted, or explicitly permitted environments. The author assumes no liability for misuse.**
 
