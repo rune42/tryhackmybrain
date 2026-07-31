@@ -1,5 +1,7 @@
 ## TTY Shell Upgrades
-
+<!--
+TODO: add a few non-Python shell upgrades
+--->
 ### Standard Bash
 A simple shell upgrade that prevents escape commands from breaking the reverse handshake by accident.
 ```
