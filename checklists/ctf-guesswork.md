@@ -2,6 +2,17 @@
 This is a WIP guide for approaching challenges and environments that do not follow classic design principles and have unorthodox leads that require guesswork.
 
 ### Initial enumeration
+**1. Find ports and versions with nmap**
+```
+nmap -sC -sV -p- -T4 -O [IP] > nmap.out
+```
+
+**2. Enumerate web endpoints**
+
+*TBA*
+
+**3. Identify avenues with curl -X OPTIONS**
+
 *TBA*
 
 ### Iterative loop
