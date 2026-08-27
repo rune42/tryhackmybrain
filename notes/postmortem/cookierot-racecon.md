@@ -20,7 +20,40 @@ An isolated incident occurred where attempting to submit a Time-Based One-Time P
 
 ## 3. Root Cause Analysis (RCA)
 The incident was a multi-stage failure caused by the intersection of a rolling infrastructure deployment and browser state management. 
-_TBA_
+
+```
+[ Client Request ] ──( 2FA Token )──> [ Cloud Edge / Load Balancer ]
+                                                      │
+                                  ┌───────────────────┴──────────────┐
+                                  ▼ (Millisecond Switchover)         ▼
+                      [ Legacy Auth Service ]          [ Updated Auth Service ]
+                      (Sent Set-Cookie header)         (Dropped legacy payload)
+                                  │                                  │
+                                  └─────────────────┬────────────────┘
+                                                    ▼
+                                        [ Connection Interrupted ]
+                                                    │
+                                                    ▼
+                                  [ Corrupted Client Cookie Written ]
+```
+### Phase 1: Microservice Blue/Green Shift
+The initial 2FA request was dispatched from a frontend interface running legacy code context. It hit the cloud infrastructure load balancer at the precise millisecond of a backend microservice switchover. The updated container context could not process the legacy payload schema, resulting in an unhandled backend exception and an dropped/infinite HTTP connection state.
+
+### Phase 2: Interrupted Token Mutation ("Rotten Cookie")
+While the initial connection was hanging, a network mutation or partial `Set-Cookie` header instruction was initialized. When the user manually refreshed the browser tab to break the freeze, the write operation to the local Chromium SQLite cookie database was cut short. This left a truncated, malformed, or cryptographic-mismatched token ("rotten cookie") saved in the primary profile.
+
+### Phase 3: Client-Side Security Tarplaying
+On subsequent authentication attempts, the browser automatically attached the malformed cookie string. The now-stable production environment security firewall interpreted this malformed data as a potential session-hijack or prototype pollution vector. Instead of failing gracefully with a standard HTTP error code, it intentionally routed the connection to a timeout queue (tarplaying) to exhaust attacker resources, causing the observed 1+ minute browser hang.
+
+## 4. Resolution & Mitigation
+
+### Immediate Fix
+* **Client-Side:** Manually purge site-specific cookies and local storage state. This forces the browser to drop the corrupted session identifier and negotiate a clean cryptographic handshake with the newly deployed backend.
+
+### Engineering Best Practices (Preventative Measures for Platforms)
+1. **Graceful Schema Deprecation:** Ensure backend authentication microservices maintain strict backward compatibility for API schemas during rolling deployments ($\text{Version } N-1$ payloads must be parsed gracefully by $\text{Version } N$ containers).
+2. **Atomic Cookie Writes:** Client and server-side state transitions should utilize atomic token rotation patterns to ensure partial network disconnects do not leave malformed cryptographic fragments in local browser memory.
+3. **Explicit Defensive Error Handling:** Security firewalls should throw standard, scannable response headers (e.g., `400 Bad Request` or `431 Request Header Fields Too Large`) rather than dropping connections silently when parsing malformed metadata, avoiding misleading client-side freezes.
 
 ---
 **This repository is for educational and authorized security auditing purposes only. All testing should be conducted in isolated, self-hosted, or explicitly permitted environments. The author assumes no liability for misuse.**
